@@ -1,8 +1,7 @@
 import tensorflow as tf
-import image_read
+
 import image_labels
-import Image
-import numpy
+import image_read
 
 
 def read_image_data(file_names, labels):

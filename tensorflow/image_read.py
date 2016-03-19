@@ -5,7 +5,7 @@ def file_names(file_path, file_name):
 
     filename_list = list()
 
-    default_path = "/Users/Darshan/Documents/kaggle/NUS-WIDE_IMAGES/NUS-WIDE-RESIZE/"
+    default_path = "/home/darshan/Documents/NUS-WIDE-RESIZE/"
 
     with open(file_path+file_name) as reader:
 
@@ -18,7 +18,7 @@ def file_names(file_path, file_name):
 
 def filenames(default_path):
 
-    file_path = "/Users/Darshan/Documents/kaggle/NUS-WIDE/"
+    file_path = "/home/darshan/Documents/NUS-WIDE/data/"
     file_name = "downloaded_image_ids.txt"
 
     filenames = list()
@@ -34,7 +34,7 @@ def filenames(default_path):
 
 def image_labels(label_code):
 
-    file_path = "/Users/Darshan/Documents/kaggle/NUS-WIDE/"
+    file_path = "/home/darshan/Documents/NUS-WIDE/data/"
     file_name = "image_labels.txt"
 
     image_labels = dict()

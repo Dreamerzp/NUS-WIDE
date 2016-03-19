@@ -1,6 +1,6 @@
 def image_label():
 
-    file_path = "/Users/Darshan/Documents/kaggle/NUS-WIDE/"
+    file_path = "/home/darshan/Documents/NUS-WIDE/data/"
     file_name = "imagelist.txt"
 
     filename_label = dict()
@@ -21,10 +21,10 @@ def image_label():
     print 'Unique Labels : ' + str(len(label_dict))
     print 'Number of records : ' + str(len(filename_label))
 
-    with open("/Users/Darshan/Documents/kaggle/NUS-WIDE/image_labels.txt", "w") as file:
+    with open("/home/darshan/Documents/NUS-WIDE/data/image_labels.txt", "w") as file:
         for key, value in filename_label.viewitems():
             file.write(key+' '+value+"\n")
-            fil
+
 
     return filename_label
 
@@ -33,13 +33,13 @@ def create_label_code():
 
     unique_labels = set()
 
-    with open("/Users/Darshan/Documents/kaggle/NUS-WIDE/image_labels.txt", "r") as file:
+    with open("/home/darshan/Documents/NUS-WIDE/data/image_labels.txt", "r") as file:
 
         for line in file:
             parts = line.split(' ')
             unique_labels.add(parts[1].replace("\n", ""))
 
-    with open("/Users/Darshan/Documents/kaggle/NUS-WIDE/label_code.txt", "w") as file:
+    with open("/home/darshan/Documents/NUS-WIDE/data/label_code.txt", "w") as file:
 
         count = 0
         for label in unique_labels:
@@ -50,7 +50,7 @@ def create_label_code():
 def fetch_label_code():
 
     label_code = dict()
-    with open("/Users/Darshan/Documents/kaggle/NUS-WIDE/label_code.txt", "r") as file:
+    with open("/home/darshan/Documents/NUS-WIDE/data/label_code.txt", "r") as file:
 
         for line in file:
             parts = line.split(' ')
@@ -64,7 +64,7 @@ def read_image_label():
     image_labels = dict()
     unique_labels = set()
 
-    with open("/Users/Darshan/Documents/kaggle/NUS-WIDE/image_labels.txt", "r") as file:
+    with open("/home/darshan/Documents/NUS-WIDE/data/image_labels.txt", "r") as file:
 
         for line in file:
             parts = line.split(' ')
