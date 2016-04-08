@@ -25,7 +25,6 @@ def image_label():
         for key, value in filename_label.viewitems():
             file.write(key+' '+value+"\n")
 
-
     return filename_label
 
 

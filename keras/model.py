@@ -12,41 +12,48 @@ def alexnet_model():
     """
 
     model = Sequential()
-    model.add(Convolution2D(64, 3, 11, 11, border_mode='full'))
-    model.add(BatchNormalization((64, 226, 226)))
+    #conv1
+    model.add(Convolution2D(48, 11, 11, border_mode='same', subsample=(4, 4),
+                            input_shape=(224, 224, 3), dim_ordering='tf'))
     model.add(Activation('relu'))
-    model.add(MaxPooling2D(poolsize=(3, 3)))
+    #pool1
+    model.add(MaxPooling2D(pool_size=(3, 3), strides=(2, 2), border_mode='valid'))
 
-    model.add(Convolution2D(128, 64, 7, 7, border_mode='full'))
-    model.add(BatchNormalization((128, 115, 115)))
+    #conv2
+    model.add(Convolution2D(128, 5, 5, border_mode='same', subsample=(1, 1), dim_ordering='tf'))
     model.add(Activation('relu'))
-    model.add(MaxPooling2D(poolsize=(3, 3)))
+    model.add(MaxPooling2D(pool_size=(3, 3), strides=(2, 2), border_mode='valid'))
 
-    model.add(Convolution2D(192, 128, 3, 3, border_mode='full'))
-    model.add(BatchNormalization((128, 112, 112)))
+    '''
+    #conv3
+    model.add(Convolution2D(192, 3, 3, border_mode='same', subsample=(1, 1), dim_ordering='tf'))
     model.add(Activation('relu'))
-    model.add(MaxPooling2D(poolsize=(3, 3)))
 
-    model.add(Convolution2D(256, 192, 3, 3, border_mode='full'))
-    model.add(BatchNormalization((128, 108, 108)))
+
+    #conv4
+    model.add(Convolution2D(192, 3, 3, border_mode='same', subsample=(1, 1), dim_ordering='tf'))
     model.add(Activation('relu'))
-    model.add(MaxPooling2D(poolsize=(3, 3)))
+
+    #conv5
+    model.add(Convolution2D(128, 3, 3, border_mode='same', subsample=(1, 1), dim_ordering='tf'))
+    model.add(Activation('relu'))
+    '''
+
+    #pool2
+    model.add(MaxPooling2D(pool_size=(3, 3), strides=(2, 2), border_mode='valid'))
 
     model.add(Flatten())
-    model.add(Dense(12*12*256, 4096, init='normal'))
-    model.add(BatchNormalization(4096))
+    model.add(Dense(4096, init='normal'))
     model.add(Dropout(0.5))
+    '''
     model.add(Activation('relu'))
-    model.add(Dense(4096, 4096, init='normal'))
-    model.add(BatchNormalization(4096))
+    model.add(Dense(4096, init='normal'))
     model.add(Dropout(0.5))
+    '''
     model.add(Activation('relu'))
-    model.add(Dense(4096, 81, init='normal'))
-    model.add(BatchNormalization(81))
-    model.add(Activation('softmax'))
+    model.add(Dense(81, init='normal'))
+    model.add(Activation('sigmoid'))
 
-    adam = Adam()
-    model.compile(loss='categorical_crossentropy',
-                  optimizer=adam)
+    model.compile(loss='binary_crossentropy', optimizer=Adam())
 
     return model

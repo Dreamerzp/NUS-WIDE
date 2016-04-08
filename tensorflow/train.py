@@ -96,7 +96,7 @@ def main(argv=None):  # pylint: disable=unused-argument
     tf.gfile.MakeDirs(FLAGS.train_dir)
 
     file_path = "/home/darshan/Documents/NUS-WIDE/data/"
-    file_name = "sample_downloaded_image_ids.txt"
+    file_name = "sample_download_image.txt"
 
     file_names = image_read.file_names(file_path, file_name)
     print('File Names are loaded')

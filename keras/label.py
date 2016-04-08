@@ -46,6 +46,51 @@ def image_label_read():
     print len(ind_label_count)
 
 
+def image_mul_label_read():
+
+    file_count = 0 # Id of image label
+    n_images = 269648
+    image_labels = dict()
+    #ind_label_count = [0] * 81
+    labels_list = list()
+    label_id = 0
+
+    for file in glob.glob("/home/darshan/Downloads/AllLabels/Labels*"):
+
+        parts = file.split("_")
+        label = parts[1].replace(".txt", "")
+        labels_list.append(label)
+        index = 0
+
+        with open(file, 'r') as file_reader:
+
+            for line in file_reader:
+                num = int(line.replace("\n", ""))
+                if num == 1:
+                    if index in image_labels:
+                        image_labels[index].append(label_id)
+                    else:
+                        labels = [label_id]
+                        image_labels[index] = labels
+                index += 1
+
+        file_count += 1
+        label_id += 1
+
+    print 'Total {0} files are explored'.format(file_count)
+
+    with open("../data/mul_label_ids.txt", "w") as label_writer:
+
+        for key, value in image_labels.items():
+            label_str = ' '.join(map(str, value))
+            label_writer.write(str(key) + "\t" + label_str + "\n")
+
+    with open("../data/label_ids.txt", "w") as label_writer:
+
+        for label, index in enumerate(labels_list):
+            label_writer.write(str(label) + "\t" + str(index) + "\n")
+
+
 def combine_full_image_id_label():
     """
     This function combines the image id and label from two separate files and write in a new file
@@ -153,7 +198,7 @@ def check_available_image_with_label():
 
 if __name__ == "__main__":
 
-    check_available_image_with_label()
+    image_mul_label_read()
 
 
 

@@ -208,7 +208,7 @@ def inference(images):
     #print_activations(pool2)
     # conv3
 
-
+    '''
     with tf.variable_scope('conv3') as scope:
         kernel = _variable_with_weight_decay('weights', shape=[3, 3, 128, 192],
                                                 stddev=1e-1, wd=0.0)
@@ -220,7 +220,7 @@ def inference(images):
         #parameters += [kernel, biases]
         #print_activations(conv3)
     # conv4
-    '''
+
     with tf.variable_scope('conv4') as scope:
         kernel = _variable_with_weight_decay('weights', shape=[3, 3, 192, 192],
                                                 stddev=1e-1, wd=0.0)
@@ -255,11 +255,11 @@ def inference(images):
     with tf.variable_scope('hidden-layer1') as scope:
         # Move everything into depth so we can perform a single matrix multiply.
         dim = 1
-        for d in conv3.get_shape()[1:].as_list():
+        for d in pool2.get_shape()[1:].as_list():
             dim *= d
         #print dim
         #print FLAGS.batch_size
-        reshape = tf.reshape(conv3, [FLAGS.batch_size, dim])
+        reshape = tf.reshape(pool2, [FLAGS.batch_size, dim])
 
         weights = _variable_with_weight_decay('weights', shape=[dim, 2048],
                                           stddev=0.04, wd=0.004)
